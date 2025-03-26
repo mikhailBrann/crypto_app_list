@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BaseCard extends StatelessWidget {
-  const BaseCard({super.key, required this.child});
+  const BaseCard({super.key, required this.child, required String title});
 
   final Widget child;
 
