@@ -43,3 +43,38 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Firebase конфигурация
+google-services.json
+firebase_options.dart
+GoogleService-Info.plist
+
+
+# Firebase ключи и секреты
+**/firebase_app_id_file.json
+**/firebase-service-account-*.json
+.firebase/*.cache
+
+# Firebase эмуляторы
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Crashlytics
+crashlytics-build.properties
+com_crashlytics_export_strings.xml
+
+# FlutterFire CLI
+.fvm/
+
+# Firebase Functions
+functions/node_modules/
+functions/.env
+
+# Firebase Hosting
+.firebase/hosting.*
+
+# Секреты
+.env
+.env.*
