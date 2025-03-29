@@ -14,6 +14,18 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  try {
+    final dio = Dio(BaseOptions(
+      baseUrl: 'https://min-api.cryptocompare.com',
+      connectTimeout: const Duration(seconds: 5),
+      receiveTimeout: const Duration(seconds: 3),
+    ));
+    debugPrint('Ошибка при инициализации firebase: ${dio.toString()}');
+  } on DioException catch (e) {
+    debugPrint('Ошибка при инициализации firebase: $e');
+  }
+  
+
   // регистратор объектов глобальной видимости
   // регистрируем через синглтон для того что бы на все приложение отрабатывал только один экземпляр объекта
   // lazySinglton - будет создан только при первом обращении к нему

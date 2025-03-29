@@ -1,3 +1,4 @@
+import 'package:crypto_app_list/repositories/crypto_coins/models/crypto_coin.dart';
 import 'package:crypto_app_list/repositories/crypto_coins/models/crypto_coin_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -17,7 +18,7 @@ class CryptoCoinScreen extends StatefulWidget {
 
 class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
   String? coinName;
-  Future<CryptoCoinDetail> fetchCryptoCoinDetail(coinName) async {
+  Future<Future<CryptoCoin>> fetchCryptoCoinDetail(coinName) async {
     return GetIt.I<AbstractCoinsRepository>().getCoinDetails(coinName!); // Пример данных
   }
 
@@ -38,8 +39,8 @@ class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
       appBar: AppBar(
         title: Text('Currency:'),
       ),
-      body: FutureBuilder<CryptoCoinDetail>(
-        future: fetchCryptoCoinDetail(coinName),
+      body: FutureBuilder<CryptoCoin>(
+        future: fetchCryptoCoinDetail(coinName).then((future) => future),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -61,7 +62,6 @@ class _CryptoCoinScreenState extends State<CryptoCoinScreen> {
   }
 }
 
-
 class _CenerCoinInfo extends StatelessWidget {
   const _CenerCoinInfo({
     required this.coinDetails,
@@ -71,55 +71,59 @@ class _CenerCoinInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CryptoCoinDetail typedCoinDetails = coinDetails as CryptoCoinDetail;
-    return Center(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 160,
-            width: 160,
-            child: Image.network(typedCoinDetails.imageUrl),
-          ),
-          const SizedBox(height: 24),
-          Text(
-            typedCoinDetails.name ?? '...',
-            style: const TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          const SizedBox(height: 8),
-          BaseCard(
-            title: '',
-            child: Center(
-              child: Text(
-                '${typedCoinDetails.priceInUSD}',
-                style: const TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ),
-          BaseCard(
-            title: '',
-            child: Column(
-              children: [
-                _DataRow(
-                  title: 'Hight 24 Hour',
-                  value: '${typedCoinDetails.hight24Hour}',
-                ),
-                const SizedBox(height: 6),
-                _DataRow(
-                  title: 'Low 24 Hour',
-                  value: '${typedCoinDetails.low24Hours}',
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+
+    debugPrint('typedCoinDetails.name: ${typedCoinDetails}');
+    return Center();
+    
+    // return Center(
+    //   child: Column(
+    //     crossAxisAlignment: CrossAxisAlignment.center,
+    //     children: [
+    //       SizedBox(
+    //         height: 160,
+    //         width: 160,
+    //         child: Image.network(typedCoinDetails.imageUrl),
+    //       ),
+    //       const SizedBox(height: 24),
+    //       Text(
+    //         typedCoinDetails.name ?? '...',
+    //         style: const TextStyle(
+    //           fontSize: 26,
+    //           fontWeight: FontWeight.w700,
+    //         ),
+    //       ),
+    //       const SizedBox(height: 8),
+    //       BaseCard(
+    //         title: '',
+    //         child: Center(
+    //           child: Text(
+    //             '${typedCoinDetails.priceInUSD}',
+    //             style: const TextStyle(
+    //               fontSize: 26,
+    //               fontWeight: FontWeight.w700,
+    //             ),
+    //           ),
+    //         ),
+    //       ),
+    //       BaseCard(
+    //         title: '',
+    //         child: Column(
+    //           children: [
+    //             _DataRow(
+    //               title: 'Hight 24 Hour',
+    //               value: '${typedCoinDetails.hight24Hour}',
+    //             ),
+    //             const SizedBox(height: 6),
+    //             _DataRow(
+    //               title: 'Low 24 Hour',
+    //               value: '${typedCoinDetails.low24Hours}',
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 }
 

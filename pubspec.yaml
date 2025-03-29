@@ -18,6 +18,7 @@ dependencies:
   talker_flutter: ^4.6.3
   auto_route: ^10.0.1
   firebase_core: ^3.12.1
+  json_annotation: ^4.0.0 
   # cupertino_icons: ^1.0.8
   # flutter_svg: ^2.0.17
   # dio: ^5.8.0+1
@@ -28,6 +29,8 @@ dependencies:
   # auto_route: ^10.0.1
 
 dev_dependencies:
+  build_runner: ^2.0.0  # Для генерации кода
+  json_serializable: ^6.0.0  # Убедитесь, что используете последнюю стабильную версию
   flutter_test:
     sdk: flutter
   # flutter_lints: ^5.0.0
